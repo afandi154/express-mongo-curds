@@ -1,4 +1,4 @@
-import Product from '../config/model.js'
+import Product from '../config-mongoose/model.js'
 
 export const getProducts = (req, res) => {
   Product.find()

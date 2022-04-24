@@ -22,7 +22,7 @@ const Tambah = () => {
     e.preventDefault()
     if (data.name.length >= 5 && data.price > 0 && data.stock > 0) {
       try {
-        await axios.post('http://localhost:9000/products', {
+        await axios.post('http://localhost:9000/mongoose/products', {
           name: data.name,
           price: data.price,
           stock: data.stock,

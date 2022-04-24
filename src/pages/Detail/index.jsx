@@ -7,7 +7,7 @@ const Detail = () => {
   const { id: productId } = useParams()
   const [data, setData] = useState('')
 
-  useEffect(() => { getData(`http://localhost:9000/products/detail/${productId}`) }, [productId])
+  useEffect(() => { getData(`http://localhost:9000/mongoose/products/detail/${productId}`) }, [productId])
 
   const getData = async (link) => {
     let data = null

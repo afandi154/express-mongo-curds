@@ -13,7 +13,7 @@ const Edit = () => {
     stock: false
   })
 
-  useEffect(() => { getData(`http://localhost:9000/products/detail/${productId}`) }, [productId])
+  useEffect(() => { getData(`http://localhost:9000/mongoose/products/detail/${productId}`) }, [productId])
 
   const getData = async (link) => {
     let data = null
@@ -30,7 +30,7 @@ const Edit = () => {
     e.preventDefault()
     if (data.name.length >= 5 && data.price > 0 && data.stock > 0) {
       try {
-        await axios.patch(`http://localhost:9000/products/edit/${productId}`, {
+        await axios.patch(`http://localhost:9000/mongoose/products/edit/${productId}`, {
           name: data.name,
           price: data.price,
           stock: data.stock,

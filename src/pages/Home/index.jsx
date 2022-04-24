@@ -8,7 +8,7 @@ const Home = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    getData(`http://localhost:9000/products/${search}`)
+    getData(`http://localhost:9000/mongoose/products/${search}`)
   }, [search])
 
   const getData = async (link) => {
@@ -26,9 +26,9 @@ const Home = () => {
     let data = null
 
     try {
-      data = await axios.delete(`http://localhost:9000/products/delete/${id}`)
+      data = await axios.delete(`http://localhost:9000/mongoose/products/delete/${id}`)
       alert("Data Berhasil Dihapus !")
-      getData(`http://localhost:9000/products/${search}`)
+      getData(`http://localhost:9000/mongoose/products/${search}`)
     } catch (error) {
       data = error
       alert("Data Gagal Dihapus !")
