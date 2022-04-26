@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import './index.scss';
 
-const Detail = () => {
+const Detail = ({ db }) => {
   const { id: productId } = useParams()
   const [data, setData] = useState('')
 
-  useEffect(() => { getData(`http://localhost:9000/mongoose/products/detail/${productId}`) }, [productId])
+  useEffect(() => { getData(`http://localhost:9000/${db}/products/detail/${productId}`) }, [productId, db])
 
   const getData = async (link) => {
     let data = null
@@ -22,7 +22,7 @@ const Detail = () => {
   return (
     data &&
     <div className="main">
-      <Link to="/" className="btn btn-primary">Kembali</Link>
+      <Link to={`/${db}/`} className="btn btn-primary">Kembali</Link>
 
       <table className="table">
         <tbody>

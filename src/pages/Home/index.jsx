@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
 
-const Home = () => {
+const Home = ({ db }) => {
   const [data, setData] = useState(null)
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    getData(`http://localhost:9000/mongoose/products/${search}`)
-  }, [search])
+    getData(`http://localhost:9000/${db}/products/${search}`)
+  }, [search, db])
 
   const getData = async (link) => {
     let data = null
@@ -26,9 +26,9 @@ const Home = () => {
     let data = null
 
     try {
-      data = await axios.delete(`http://localhost:9000/mongoose/products/delete/${id}`)
+      data = await axios.delete(`http://localhost:9000/${db}/products/delete/${id}`)
       alert("Data Berhasil Dihapus !")
-      getData(`http://localhost:9000/mongoose/products/${search}`)
+      getData(`http://localhost:9000/${db}/products/${search}`)
     } catch (error) {
       data = error
       alert("Data Gagal Dihapus !")
@@ -39,7 +39,7 @@ const Home = () => {
   return (
     data &&
     <div className="main">
-      <Link to="/tambah" className="btn btn-primary">Tamah Produk</Link>
+      <Link to={`/${db}/tambah`} className="btn btn-primary">Tamah Produk</Link>
       <div className="search">
         <input type="text" placeholder="Masukan kata kunci..."
           onChange={(e) => setSearch(e.target.value)} />
@@ -62,9 +62,9 @@ const Home = () => {
                   <td>{res.name}</td>
                   <td>{res.price}</td>
                   <td className="text-center">
-                    <Link to={`/detail/${res._id}`} className="btn btn-sm btn-info">Detail</Link>
-                    <Link to={`/edit/${res._id}`} className="btn btn-sm btn-warning">Edit</Link>
-                    <Link to="/"
+                    <Link to={`/${db}/detail/${res._id}`} className="btn btn-sm btn-info">Detail</Link>
+                    <Link to={`/${db}/edit/${res._id}`} className="btn btn-sm btn-warning">Edit</Link>
+                    <Link to={`/${db}/`}
                       onClick={() => deleteProduct(res._id)}
                       className="btn btn-sm btn-danger">Delete
                     </Link>

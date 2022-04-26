@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input';
 import './index.scss';
 
-const Tambah = () => {
+const Tambah = ({ db }) => {
   const navigate = useNavigate()
   const [data, setData] = useState({
     name: '',
@@ -22,14 +22,14 @@ const Tambah = () => {
     e.preventDefault()
     if (data.name.length >= 5 && data.price > 0 && data.stock > 0) {
       try {
-        await axios.post('http://localhost:9000/mongoose/products', {
+        await axios.post(`http://localhost:9000/${db}/products`, {
           name: data.name,
           price: data.price,
           stock: data.stock,
           status: data.status
         })
         alert("Data Berhasil dimasukan !")
-        navigate('/')
+        navigate(`/${db}/`)
       } catch (error) {
         alert("Data Gagal dimasukan !")
         console.log(error)

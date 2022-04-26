@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../../components/Input";
 
-const Edit = () => {
+const Edit = ({ db }) => {
   const navigate = useNavigate()
   const { id: productId } = useParams()
   const [data, setData] = useState(null)
@@ -13,7 +13,7 @@ const Edit = () => {
     stock: false
   })
 
-  useEffect(() => { getData(`http://localhost:9000/mongoose/products/detail/${productId}`) }, [productId])
+  useEffect(() => { getData(`http://localhost:9000/${db}/products/detail/${productId}`) }, [productId, db])
 
   const getData = async (link) => {
     let data = null
@@ -30,14 +30,14 @@ const Edit = () => {
     e.preventDefault()
     if (data.name.length >= 5 && data.price > 0 && data.stock > 0) {
       try {
-        await axios.patch(`http://localhost:9000/mongoose/products/edit/${productId}`, {
+        await axios.patch(`http://localhost:9000/${db}/products/edit/${productId}`, {
           name: data.name,
           price: data.price,
           stock: data.stock,
           status: data.status
         })
         alert("Data Berhasil diupdate !")
-        navigate('/')
+        navigate(`/${db}/`)
       } catch (error) {
         alert("Data Gagal diupdate !")
         console.log(error)
